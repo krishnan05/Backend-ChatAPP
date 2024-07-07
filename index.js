@@ -8,11 +8,16 @@ const messageRoute = require("./routes/messagesRoute");
 const socket = require("socket.io");
 
 dotenv.config();
-app.use(cors());
+const corsOptions = {
+    origin: 'https://chatapp-krishnan.vercel.app', 
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*'); // Replace with your frontend origin
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Adjust allowed headers as needed
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Adjust allowed methods as needed
+    res.header('Access-Control-Allow-Origin', '*'); 
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); 
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); 
     next();
 });
 app.use(express.json());
