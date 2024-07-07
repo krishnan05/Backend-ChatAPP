@@ -8,18 +8,28 @@ const messageRoute = require("./routes/messagesRoute");
 const socket = require("socket.io");
 
 dotenv.config();
+// const corsOptions = {
+//     origin: 'https://chatapp-krishnan.vercel.app', 
+//     optionsSuccessStatus: 200
+// };
+
+// app.use(cors(corsOptions));
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*'); 
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); 
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); 
+//     next();
+// });
+
 const corsOptions = {
-    origin: 'https://chatapp-krishnan.vercel.app', 
-    optionsSuccessStatus: 200
-};
+    origin: ['https://chatapp-krishnan.vercel.app'],
+    allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Methods", "Access-Control-Request-Headers"],
+    credentials: true,
+    enablePreflight: true
+}
 
 app.use(cors(corsOptions));
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*'); 
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); 
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); 
-    next();
-});
+app.options('*', cors(corsOptions))
 app.use(express.json());
 
 app.use("/api/auth", userRoutes);
