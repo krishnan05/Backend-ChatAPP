@@ -14,37 +14,23 @@ dotenv.config();
 // };
 
 // app.use(cors(corsOptions));
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*'); 
-//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); 
-//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); 
-//     next();
-// });
-
-// const corsOptions = {
-//     origin: ['https://chatapp-krishnan.vercel.app'],
-//     allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Methods", "Access-Control-Request-Headers"],
-//     credentials: true,
-//     enablePreflight: true
-// }
-
-// app.use(cors(corsOptions));
-// app.options('*', cors(corsOptions))
-app.use(function (req, res, next) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    // res.setHeader("Access-Control-Allow-Credentials", true);
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); 
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); 
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); 
     next();
-  });
-app.use("*", (req, res, next) => {
-    const error = {
-      status: 404,
-      message: API_ENDPOINT_NOT_FOUND_ERR,
-    };
-    next(error);
-  });
+});
+
+const corsOptions = {
+    origin: ['https://chatapp-krishnan.vercel.app'],
+    allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Methods", "Access-Control-Request-Headers"],
+    credentials: true,
+    enablePreflight: true
+}
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions))
+
 app.use(express.json());
 
 app.use("/api/auth", userRoutes);
