@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 });
 
 const corsOptions = {
-    origin: ['https://chatapp-krishnan.vercel.app'],
+    origin: ['*'],
     allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Methods", "Access-Control-Request-Headers"],
     credentials: true,
     enablePreflight: true
